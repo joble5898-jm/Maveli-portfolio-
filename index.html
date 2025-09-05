@@ -1297,3 +1297,132 @@
                 let html = text;
                 html = html.replace(/^#\s(.*)$/gm, '<h1>$1</h1>');
             
+        <section id="maveli-game" data-animate-on-scroll class="fade-in-up glass-card p-8 md:p-12 mb-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-amber-300 mb-6">മാവേലി ടിക്-ടാക്-ടോ</h2>
+            <p class="text-lg mb-6 text-amber-200">
+                എന്റെ പ്രിയപ്പെട്ട പ്രജകളേ, നിങ്ങൾക്കായി ഒരു പുതിയ കളി! മാവേലിയും വാമനനും തമ്മിലുള്ള ഈ കളിയിൽ ആരു ജയിക്കുമെന്നു നോക്കാം.
+            </p>
+            <div id="game-container" class="flex flex-col items-center">
+                <div id="game-board" class="grid grid-cols-3 gap-2 w-full max-w-sm aspect-square bg-gray-800 p-4 rounded-xl border-4 border-amber-300">
+                    <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200 hover:bg-amber-800/20"></div>
+                    <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200 hover:bg-amber-800/20"></div>
+                    <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200 hover:bg-amber-800/20"></div>
+                    <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200 hover:bg-amber-800/20"></div>
+                    <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200 hover:bg-amber-800/20"></div>
+                    <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200 hover:bg-amber-800/20"></div>
+                    <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200 hover:bg-amber-800/20"></div>
+                    <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200 hover:bg-amber-800/20"></div>
+                    <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200 hover:bg-amber-800/20"></div>
+                </div>
+                <div id="game-status" class="mt-4 text-xl font-bold text-amber-300">മാവേലി തുടങ്ങുന്നു!</div>
+                <button id="restart-game-btn" class="mt-4 px-6 py-2 bg-[var(--button-bg)] text-white font-semibold rounded-full hover:bg-[var(--button-hover)] transition-colors hidden">വീണ്ടും കളിക്കുക</button>
+            </div>
+        </section>
+/* Game-specific styles */
+.game-cell {
+    height: 100%;
+    /* You can adjust these values for the correct aspect ratio */
+}
+.game-cell:hover:not(.occupied) {
+    background-color: var(--card-bg);
+}
+.game-cell.maaveli::after {
+    content: '👑'; /* Maaveli's crown */
+    font-size: 3rem;
+    animation: bounceIn 0.5s ease-out;
+}
+.game-cell.vamana::after {
+    content: '👣'; /* Vamana's foot */
+    font-size: 3rem;
+    animation: bounceIn 0.5s ease-out;
+}
+@keyframes bounceIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.cosmic-mode .game-cell {
+    border-color: var(--card-border);
+}
+        // Maaveli Tic-Tac-Toe Game Logic
+        const gameBoard = document.getElementById('game-board');
+        const gameCells = document.querySelectorAll('.game-cell');
+        const gameStatus = document.getElementById('game-status');
+        const restartButton = document.getElementById('restart-game-btn');
+
+        let currentPlayer = 'maaveli'; // 'maaveli' or 'vamana'
+        let boardState = ['', '', '', '', '', '', '', '', ''];
+        let isGameActive = true;
+
+        const winningConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        const handleResultValidation = () => {
+            let roundWon = false;
+            for (let i = 0; i < winningConditions.length; i++) {
+                const winCondition = winningConditions[i];
+                const a = boardState[winCondition[0]];
+                const b = boardState[winCondition[1]];
+                const c = boardState[winCondition[2]];
+                if (a === '' || b === '' || c === '') {
+                    continue;
+                }
+                if (a === b && b === c) {
+                    roundWon = true;
+                    break;
+                }
+            }
+
+            if (roundWon) {
+                gameStatus.innerText = `👑 മാവേലി വിജയിച്ചു! 👑`;
+                isGameActive = false;
+                restartButton.classList.remove('hidden');
+                return;
+            }
+
+            if (!boardState.includes('')) {
+                gameStatus.innerText = 'കളി സമനിലയിൽ!';
+                isGameActive = false;
+                restartButton.classList.remove('hidden');
+                return;
+            }
+
+            changePlayer();
+        };
+
+        const changePlayer = () => {
+            currentPlayer = currentPlayer === 'maaveli' ? 'vamana' : 'maaveli';
+            gameStatus.innerText = `${currentPlayer === 'maaveli' ? 'മാവേലിയുടെ' : 'വാമനന്റെ'} ഊഴം`;
+        };
+
+        const userAction = (cell, index) => {
+            if (isGameActive && boardState[index] === '') {
+                boardState[index] = currentPlayer;
+                cell.classList.add(currentPlayer);
+                cell.classList.add('occupied');
+                handleResultValidation();
+            }
+        };
+
+        gameCells.forEach((cell, index) => {
+            cell.addEventListener('click', () => userAction(cell, index));
+        });
+
+        restartButton.addEventListener('click', () => {
+            isGameActive = true;
+            currentPlayer = 'maaveli';
+            boardState = ['', '', '', '', '', '', '', '', ''];
+            gameStatus.innerText = 'മാവേലി തുടങ്ങുന്നു!';
+            restartButton.classList.add('hidden');
+            gameCells.forEach(cell => {
+                cell.classList.remove('maaveli', 'vamana', 'occupied');
+            });
+        });
