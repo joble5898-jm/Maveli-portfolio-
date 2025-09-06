@@ -1426,3 +1426,106 @@
                 cell.classList.remove('maaveli', 'vamana', 'occupied');
             });
         });
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maaveli's Royal Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Previous styles remain the same */
+        
+        /* Game-specific styles */
+        .game-cell {
+            height: 100px; /* Fixed height for game cells */
+            min-height: 100px;
+        }
+        .game-cell:hover:not(.occupied) {
+            background-color: rgba(216, 196, 178, 0.1);
+        }
+        .game-cell.maaveli::after {
+            content: '👑'; /* Maaveli's crown */
+            font-size: 3rem;
+            animation: bounceIn 0.5s ease-out;
+        }
+        .game-cell.vamana::after {
+            content: '👣'; /* Vamana's foot */
+            font-size: 3rem;
+            animation: bounceIn 0.5s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .cosmic-mode .game-cell {
+            border-color: var(--card-border);
+        }
+        .cosmic-mode .game-cell.maaveli::after {
+            content: '👑';
+        }
+        .cosmic-mode .game-cell.vamana::after {
+            content: '👣';
+        }
+    </style>
+</head>
+<body class="bg-[#112a14] text-amber-100">
+
+    <!-- Your existing HTML content remains the same -->
+    
+    <!-- Maaveli Tic-Tac-Toe Game Section -->
+    <section id="maveli-game" data-animate-on-scroll class="fade-in-up glass-card p-8 md:p-12 mb-12 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-amber-300 mb-6">മാവേലി ടിക്-ടാക്-ടോ</h2>
+        <p class="text-lg mb-6 text-amber-200">
+            എന്റെ പ്രിയപ്പെട്ട പ്രജകളേ, നിങ്ങൾക്കായി ഒരു പുതിയ കളി! മാവേലിയും വാമനനും തമ്മിലുള്ള ഈ കളിയിൽ ആരു ജയിക്കുമെന്നു നോക്കാം.
+        </p>
+        <div id="game-container" class="flex flex-col items-center">
+            <div id="game-board" class="grid grid-cols-3 gap-2 w-full max-w-sm bg-gray-800 p-4 rounded-xl border-4 border-amber-300">
+                <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200" data-index="0"></div>
+                <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200" data-index="1"></div>
+                <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200" data-index="2"></div>
+                <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200" data-index="3"></div>
+                <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200" data-index="4"></div>
+                <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200" data-index="5"></div>
+                <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200" data-index="6"></div>
+                <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200" data-index="7"></div>
+                <div class="game-cell border border-amber-200 rounded-lg flex items-center justify-center text-4xl font-bold cursor-pointer transition-colors duration-200" data-index="8"></div>
+            </div>
+            <div id="game-status" class="mt-4 text-xl font-bold text-amber-300">മാവേലി തുടങ്ങുന്നു!</div>
+            <button id="restart-game-btn" class="mt-4 px-6 py-2 bg-[var(--button-bg)] text-white font-semibold rounded-full hover:bg-[var(--button-hover)] transition-colors hidden">വീണ്ടും കളിക്കുക</button>
+        </div>
+    </section>
+    
+    <!-- Your existing HTML content remains the same -->
+
+    <script type="module">
+        // Your existing JavaScript code remains the same
+        
+        // Maaveli Tic-Tac-Toe Game Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const gameBoard = document.getElementById('game-board');
+            const gameCells = document.querySelectorAll('.game-cell');
+            const gameStatus = document.getElementById('game-status');
+            const restartButton = document.getElementById('restart-game-btn');
+
+            let currentPlayer = 'maaveli'; // 'maaveli' or 'vamana'
+            let boardState = ['', '', '', '', '', '', '', '', ''];
+            let isGameActive = true;
+
+            const winningConditions = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+
+            const handleResultValidation = () => {
+                let roundWon = false;
