@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maveli Logo</title>
+  <style>
+    body {
+      background-color: #000; /* black background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    img {
+      max-width: 300px; /* adjust logo size */
+      border-radius: 12px; /* optional rounded corners */
+    }
+  </style>
+</head>
+<body>
+  <!-- Replace "maveli.png" with your actual image filename -->
+  <img src="maveli.png" alt="Maveli Logo">
+</body>
+</html>
