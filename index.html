@@ -115,6 +115,322 @@
         }
         .chat-sidebar.open, .translator-sidebar.open { right: 0; }
 
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maaveli's Royal Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --bg-start: #112a14;
+            --bg-end: #2a112a;
+            --text-color: #d8c4b2; /* Lighter gold */
+            --card-bg: rgba(29, 13, 29, 0.5); /* Dark purple transparent */
+            --card-border: rgba(216, 196, 178, 0.3); /* Lighter gold transparent */
+            --button-bg: #e59c11; /* Amber */
+            --button-hover: #b47a0d; /* Darker Amber */
+            --accent-color: #d8c4b2;
+            --chat-bg: #122b13;
+            --chat-bot-msg: #2e4d41;
+        }
+
+        .cosmic-mode {
+            --bg-start: #0b0f26;
+            --bg-end: #1a2035;
+            --text-color: #d1d9e2;
+            --card-bg: rgba(26, 32, 53, 0.6);
+            --card-border: rgba(209, 217, 226, 0.3);
+            --button-bg: #6366f1; /* Indigo */
+            --button-hover: #4338ca; /* Darker Indigo */
+            --accent-color: #818cf8; /* Light blue-violet */
+            --chat-bg: #2a2642;
+            --chat-bot-msg: #3f456c;
+        }
+
+        body {
+            font-family: 'IM Fell English', serif;
+            background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+        }
+
+        /* Logo styling */
+        .royal-logo {
+            font-family: 'IM Fell English', serif;
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: #e59c11;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to bottom, #fbbf24, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0.5rem;
+            border: 3px solid #b45309;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(229, 156, 17, 0.5);
+        }
+
+        /* Optimized Fade-in-up effect for sections on scroll */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Text shadow to simulate old ink */
+        h1, h2, h3 {
+            text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cosmic-mode h1, .cosmic-mode h2, .cosmic-mode h3,
+        .cosmic-mode p, .cosmic-mode a, .cosmic-mode li, .cosmic-mode button,
+        .cosmic-mode input, .cosmic-mode textarea {
+            text-shadow: none;
+        }
+
+        /* Flower animation */
+        @keyframes flower-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translateY(calc(100vh + 100px)) rotate(360deg); opacity: 0; }
+        }
+
+        .flower {
+            position: fixed;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 0;
+            animation: flower-fall linear infinite;
+        }
+
+        /* Slideshow navigation buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 1rem;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            transition: 0.3s;
+            border-radius: 0.5rem;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .next { right: 1rem; }
+        .prev { left: 1rem; }
+        .prev:hover, .next:hover { background-color: rgba(0, 0, 0, 0.8); }
+
+        /* Chatbot and Translator sidebar */
+        .chat-sidebar, .translator-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: var(--chat-bg);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            transition: right 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-sidebar.open, .translator-sidebar.open { right: 0; }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .message {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.bot {
+            background-color: var(--chat-bot-msg);
+            color: var(--text-color);
+            align-self: flex-start;
+            border-bottom-left-radius: 0rem;
+        }
+        
+        .message.user {
+            background-color: var(--button-bg);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0rem;
+        }
+
+        .cosmic-mode .chat-sidebar, .cosmic-mode .translator-sidebar {
+            background-color: #1a2035; 
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cosmic-mode .message.bot { 
+            background-color: #3f456c; 
+            color: var(--text-color); 
+        }
+        
+        .cosmic-mode .message.user { 
+            background-color: var(--button-bg); 
+        }
+
+        .message.new {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Aura Animation */
+        .hero-aura {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .hero-aura::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+            animation: pulse 4s infinite ease-in-out;
+            opacity: 0.15;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.9); opacity: 0.1; }
+            50% { transform: scale(1.1); opacity: 0.2; }
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cosmic-mode .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+        }
+
+        .citation {
+            font-size: 0.75rem;
+            color: #a0a0a0;
+            margin-top: 0.5rem;
+        }
+
+        .cosmic-mode .citation {
+            color: #b0b8c6;
+        }
+
+        .click-effect {
+            position: absolute;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 99;
+            transform: translate(-50%, -50%);
+            animation: burst 1s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes burst {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+
+        .loading-animation {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        .cosmic-mode .loading-animation {
+            border-color: rgba(209, 217, 226, 0.3);
+            border-top-color: #d1d9e2;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hamburger-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--chat-bg);
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+            transition: left 0.4s ease-in-out;
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .hamburger-menu.open {
+            left: 0;
+        }
+
+        .cosmic-mode .hamburger-menu { 
+            background-color
         .chat-messages {
             flex-grow: 1;
             padding: 1rem;
