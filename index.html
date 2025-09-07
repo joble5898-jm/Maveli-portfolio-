@@ -1,537 +1,362 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maaveli's Royal Portfolio</title>
-    <header>
-  <img src="images/logo.png" alt="Maveli Logo" class="logo">
-</header>
-<script 
-src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    <style>
-<img src="maveli-logo.png.pdf" alt="Maveli Logo">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maaveli's Royal Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
-<img src="images/logo.png" alt="A regal portrait of the King.">
-.logo {
-  width: 150px;   /* change size as needed */
-  height: auto;
-}
-        /* Global Styles */
-        :root {
-            --bg-start: #112a14;
-            --bg-end: #2a112a;
-            --text-color: #d8c4b2; /* Lighter gold */
-            --card-bg: rgba(29, 13, 29, 0.5); /* Dark purple transparent */
-            --card-border: rgba(216, 196, 178, 0.3); /* Lighter gold transparent */
-            --button-bg: #e59c11; /* Amber */
-            --button-hover: #b47a0d; /* Darker Amber */
-            --accent-color: #d8c4b2;
-            --chat-bg: #122b13;
-            --chat-bot-msg: #2e4d41;
-        }
+  <style>
+    /* Global Styles */
+    :root {
+      --bg-start: #112a14;
+      --bg-end: #2a112a;
+      --text-color: #d8c4b2; /* Lighter gold */
+      --card-bg: rgba(29, 13, 29, 0.5); /* Dark purple transparent */
+      --card-border: rgba(216, 196, 178, 0.3); /* Lighter gold transparent */
+      --button-bg: #e59c11; /* Amber */
+      --button-hover: #b47a0d; /* Darker Amber */
+      --accent-color: #d8c4b2;
+      --chat-bg: #122b13;
+      --chat-bot-msg: #2e4d41;
+    }
 
-        .cosmic-mode {
-            --bg-start: #0b0f26;
-            --bg-end: #1a2035;
-            --text-color: #d1d9e2;
-            --card-bg: rgba(26, 32, 53, 0.6);
-            --card-border: rgba(209, 217, 226, 0.3);
-            --button-bg: #6366f1; /* Indigo */
-            --button-hover: #4338ca; /* Darker Indigo */
-            --accent-color: #818cf8; /* Light blue-violet */
-            --chat-bg: #2a2c42;
-            --chat-bot-msg: #3f456c;
-        }
-        
-        body {
-            font-family: 'IM Fell English', serif;
-            background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
-            color: var(--text-color);
-            overflow-x: hidden;
-            transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
-        }
+    .cosmic-mode {
+      --bg-start: #0b0f26;
+      --bg-end: #1a2035;
+      --text-color: #d1d9e2;
+      --card-bg: rgba(26, 32, 53, 0.6);
+      --card-border: rgba(209, 217, 226, 0.3);
+      --button-bg: #6366f1; /* Indigo */
+      --button-hover: #4338ca; /* Darker Indigo */
+      --accent-color: #818cf8; /* Light blue-violet */
+      --chat-bg: #2a2c42;
+      --chat-bot-msg: #3f456c;
+    }
 
-        /* Optimized Fade-in-up effect for sections on scroll */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, transform;
-        }
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-
-        /* Text shadow to simulate old ink */
-        h1, h2, h3 {
-            text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, 0.3);
-        }
-        .cosmic-mode h1, .cosmic-mode h2, .cosmic-mode h3, .cosmic-mode p, .cosmic-mode a, .cosmic-mode li, .cosmic-mode button, .cosmic-mode input, .cosmic-mode textarea {
-            text-shadow: none;
-        }
-        
-        /* Flower animation */
-        @keyframes flower-fall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            100% { transform: translateY(calc(100vh + 100px)) rotate(360deg); opacity: 0; }
-        }
-
-        .flower {
-            position: fixed;
-            font-size: 20px;
-            pointer-events: none;
-            z-index: 0;
-            animation: flower-fall linear infinite;
-        }
-
-        /* Slideshow navigation buttons */
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 1rem;
-            color: white;
-            font-weight: bold;
-            font-size: 1.5rem;
-            transition: 0.3s;
-            border-radius: 0.5rem;
-            user-select: none;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        .next { right: 1rem; }
-        .prev { left: 1rem; }
-        .prev:hover, .next:hover { background-color: rgba(0, 0, 0, 0.8); }
-
-        /* Chatbot and Translator sidebar */
-        .chat-sidebar, .translator-sidebar {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            background-color: var(--chat-bg);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-            transition: right 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-            z-index: 50;
-            display: flex;
-            flex-direction: column;
-        }
-        .chat-sidebar.open, .translator-sidebar.open { right: 0; }
-
-        .chat-messages {
-            flex-grow: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .message {
-             padding: 0.75rem 1rem;
-             border-radius: 0.5rem;
-             max-width: 80%;
-             word-wrap: break-word;
-        }
-
-        .message.bot {
-            background-color: var(--chat-bot-msg);
-            color: var(--text-color);
-            align-self: flex-start;
-            border-bottom-left-radius: 0rem;
-        }
-        .message.user {
-             background-color: var(--button-bg);
-             color: white;
-             align-self: flex-end;
-             border-bottom-right-radius: 0rem;
-        }
-        
-        .cosmic-mode .chat-sidebar, .cosmic-mode .translator-sidebar { background-color: #1a2035; box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1); }
-        .cosmic-mode .message.bot { background-color: #3f456c; color: var(--text-color); }
-        .cosmic-mode .message.user { background-color: var(--button-bg); }
-        
-        .message.new {
-            opacity: 0;
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Hero Aura Animation */
-        .hero-aura {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .hero-aura::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
-            animation: pulse 4s infinite ease-in-out;
-            opacity: 0.15;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(0.9); opacity: 0.1; }
-            50% { transform: scale(1.1); opacity: 0.2; }
-        }
-
-        /* Glassmorphism Cards */
-        .glass-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-        }
-        .cosmic-mode .glass-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-        }
-
-        .citation {
-            font-size: 0.75rem;
-            color: #a0a0a0;
-            margin-top: 0.5rem;
-        }
-        
-        .cosmic-mode .citation {
-            color: #b0b8c6;
-        }
-        
-        .click-effect {
-            position: absolute;
-            font-size: 20px;
-            pointer-events: none;
-            z-index: 99;
-            transform: translate(-50%, -50%);
-            animation: burst 1s forwards;
-            opacity: 0;
-        }
-
-        @keyframes burst {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-        }
-
-        .loading-animation {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #fff;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-        
-        .cosmic-mode .loading-animation {
-            border-color: rgba(209, 217, 226, 0.3);
-            border-top-color: #d1d9e2;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .hamburger-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            max-width: 300px;
-            height: 100vh;
-            background-color: var(--chat-bg);
-            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
-            transition: left 0.4s ease-in-out;
-            z-index: 60;
-            display: flex;
-            flex-direction: column;
-            padding: 2rem;
-            box-sizing: border-box;
-        }
-
-        .hamburger-menu.open {
-            left: 0;
-        }
-        
-        .cosmic-mode .hamburger-menu { background-color: #1a2035; }
-        
-        .menu-link {
-            padding: 0.75rem 1rem;
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 1.25rem;
-            font-weight: 700;
-            border-radius: 0.5rem;
-            transition: background-color 0.3s ease;
-            border-bottom: 1px solid rgba(46, 77, 65, 0.3);
-        }
-
-        .menu-link:hover {
-            background-color: var(--card-bg);
-        }
-        .cosmic-mode .menu-link { border-bottom: 1px solid rgba(209, 217, 226, 0.1); }
-
-        /* Continuous Slideshow styles */
-        .continuous-slideshow-container {
-            overflow: hidden;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
-        .continuous-slideshow-track {
-            display: flex;
-            width: 200%; /* Changed for a 2-set loop */
-            animation: scroll 30s linear infinite;
-        }
-        .continuous-slideshow-slide {
-            flex: 0 0 calc(100% / 3); /* Display 3 slides at a time */
-            padding: 0.5rem;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
-        }
-        
-        /* New animations for chat toggle button */
-        @keyframes subtle-pulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--button-bg)); }
-            50% { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--button-bg)); }
-        }
-        
-        .chat-toggle-btn {
-            animation: subtle-pulse 2s ease-in-out infinite;
-            transition: transform 0.2s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-        }
-        
-        /* New animations for translator toggle button */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .translator-toggle-btn {
-            animation: float 3s ease-in-out infinite;
-            transition: transform 0.2s ease-in-out;
-        }
-        
-        /* Dark/Light Mode Toggle */
-        .theme-toggle-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .theme-toggle-btn:hover {
-            transform: scale(1.1);
-        }
-        .theme-toggle-btn svg {
-            transition: transform 0.5s ease-in-out;
-        }
-        .cosmic-mode .theme-toggle-btn svg {
-            transform: rotate(180deg);
-        }
-
-        /* Modal Styles */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 70;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .modal.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 1.5rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            position: relative;
-            color: var(--text-color);
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-        .modal.open .modal-content {
-            transform: scale(1);
-        }
-
-        .cosmic-mode .modal-content {
-            background-color: #1a2035;
-            color: #d1d9e2;
-        }
-        .cosmic-mode input, .cosmic-mode textarea, .cosmic-mode .chat-input {
-            color: #d1d9e2 !important;
-            background-color: #2a2c42;
-            border-color: #3f456c;
-        }
-        
-        .chatbot-icon {
-            width: 50px; 
-            height: 50px;
-        }
-
-        /* Tic-Tac-Toe Game Styles */
-        #tic-tac-toe-board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            width: 300px;
-            height: 300px;
-            margin: 20px auto;
-            transition: pointer-events 0.3s ease;
-        }
-        .cell {
-            background: var(--chat-bot-msg);
-            border: 2px solid var(--card-border);
-            border-radius: 0.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .cell:hover {
-            background: var(--card-bg);
-        }
-        .cosmic-mode .cell {
-             background: var(--chat-bot-msg);
-             border-color: var(--card-border);
-        }
-        .cosmic-mode .cell:hover {
-            background: var(--card-bg);
-        }
-
-        /* Boat Race Styles */
-        #race-track {
-             background-image: linear-gradient(to right, #1e3a8a, #3b82f6);
-        }
-        .cosmic-mode #race-track {
-             background-image: linear-gradient(to right, #1e1b4b, #4338ca);
-        }
-        .boat {
-            position: absolute;
-            left: 10px;
-            font-size: 2.5rem;
-            transition-property: left;
-            transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045); /* ease-in-back */
-        }
-        .boat.racing {
-            left: calc(100% - 60px);
-        }
-
-
-    </style>
+    body {
+      font-family: 'IM Fell English', serif;
+      background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
+      color: var(--text-color);
+      min-height: 100vh;
+    }
+  </style>
 </head>
-<body class="bg-[#112a14] text-amber-100">
+<body>
+  <!-- Header with Logo -->
+  <header class="p-6 flex items-center bg-opacity-20 bg-black border-b border-[var(--card-border)]">
+    <img src="maveli-logo.png" alt="Maaveli Logo" class="h-16 w-16 mr-4 rounded-full border border-[var(--card-border)] shadow-lg">
+    <h1 class="text-3xl font-bold text-[var(--text-color)]">Maaveli's Royal Portfolio</h1>
+  </header>
 
-    <!-- Cosmic Light Canvas -->
-    <canvas id="cosmic-canvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
+  <!-- Main Content Placeholder -->
+  <main class="p-8">
+    <section class="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6 shadow-lg">
+      <h2 class="text-2xl mb-4 font-semibold text-[var(--accent-color)]">Welcome</h2>
+      <p>
+        This is Maaveli’s royal portfolio. More sections like projects,
+        achievements, and contact details can be added here.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
+/* Glassmorphism Enhancements */
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2),
+              0 0 15px var(--card-border);
+}
+.cosmic-mode .glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+}
+.cosmic-mode .glass-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2),
+              0 0 15px var(--card-border);
+}
 
-    <!-- Flower Container (fixed position for animation) -->
-    <div id="flower-container" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden"></div>
+/* Click Effect */
+.click-effect {
+  position: absolute;
+  font-size: 20px;
+  pointer-events: none;
+  z-index: 99;
+  transform: translate(-50%, -50%);
+  animation: burst 1s forwards;
+  opacity: 0;
+}
+@keyframes burst {
+  0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
 
-    <!-- Header Section -->
-    <header class="bg-gradient-to-r from-[var(--bg-start)] to-[var(--bg-end)] shadow-lg text-white py-12 px-6 text-center rounded-b-3xl relative z-10 overflow-hidden">
-        <div class="hero-aura"></div>
-        <!-- Buttons Container -->
-        <div class="absolute top-6 left-6 z-20">
-            <button id="hamburger-btn" class="p-2 rounded-full bg-[#1d0d1d] bg-opacity-50 text-white hover:bg-opacity-80 transition-colors">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-        </div>
-        <div class="absolute top-6 right-6 z-20 flex space-x-2">
-            <!-- New Theme Toggle Button -->
-            <button id="theme-toggle-btn" class="theme-toggle-btn p-2 rounded-full bg-[#1d0d1d] bg-opacity-50 text-white hover:bg-opacity-80 transition-colors">
-                   <svg id="theme-icon" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-            </button>
-        </div>
-        <!-- Maaveli's Logo -->
-        <div class="mb-4 relative z-10">
-             <img src="https://firebasestorage.googleapis.com/v0/b/app-maaveli-s-royal-portfoli-169c9.appspot.com/o/1000006025.jpg?alt=media&token=8cd55754-bf51-4ea2-99b7-9ee5706afb87" alt="Maaveli's Royal Logo" class="mx-auto w-24 h-24 rounded-full border-4 border-amber-300 shadow-xl">
-        </div>
-        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight relative z-10">Maaveli's Royal Portfolio</h1>
-        <p class="mt-4 text-xl md:text-2xl font-light relative z-10">Monarch of the Golden Age, Hero of the Three Worlds</p>
-    </header>
+/* Loading Animation */
+.loading-animation {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+.cosmic-mode .loading-animation {
+  border-color: rgba(209, 217, 226, 0.3);
+  border-top-color: #d1d9e2;
+}
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
-    <!-- Main Content Container with bottom padding for fixed buttons -->
-    <main class="container mx-auto px-4 py-8 md:py-16 relative z-10 pb-40">
-        <!-- About Me Section -->
-        <section id="about" class="fade-in-up glass-card p-8 md:p-12 mb-12 flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-12">
-            <div class="w-full md:w-1/2 flex justify-center">
-                <img src="https://source.unsplash.com/600x600/?king-mahabali" alt="A regal portrait of the King." class="w-full h-auto rounded-3xl border-4 border-amber-300 shadow-xl transition-transform hover:scale-105">
-            </div>
-            <div class="w-full md:w-1/2 flex flex-col items-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-amber-300 mb-6">About the King</h2>
-                <p id="about-text" class="text-lg leading-relaxed text-amber-200">
-                    Hailed as the most generous and just ruler to ever grace the earth, my reign over Kerala was an era of unparalleled prosperity. Under my watch, my kingdom knew no want, no deceit, and no sorrow. Every door was an open door, every heart was content. While my tale is one of divine intervention and a journey to the netherworld, my annual return for Onam proves that true leadership is a bond that transcends dimensions. My motto? "Serve the people, and the people will forever serve you... a delicious feast!"
-                </p>
-                 <div class="flex justify-center mt-6">
-                    <button id="tts-button" class="px-6 py-2 bg-amber-700 text-white font-semibold rounded-full hover:bg-amber-800 transition-colors">✨ Majesty in Words✨</button>
-                    <div id="tts-loading" class="mt-2 hidden ml-4">
-                        <div class="loading-animation"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+/* Hamburger Menu */
+.hamburger-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  max-width: 300px;
+  height: 100vh;
+  background-color: var(--chat-bg);
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+  transition: left 0.4s ease-in-out;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+.hamburger-menu.open { left: 0; }
+.cosmic-mode .hamburger-menu { background-color: #1a2035; }
+.menu-link {
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+  border-bottom: 1px solid rgba(46, 77, 65, 0.3);
+}
+.menu-link:hover { background-color: var(--card-bg); }
+.cosmic-mode .menu-link {
+  border-bottom: 1px solid rgba(209, 217, 226, 0.1);
+}
 
-        <!-- Heroic Deeds Section -->
-        <section id="deeds" class="fade-in-up mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-amber-300 mb-6 text-center">Heroic Deeds</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-card p-6 transform transition-transform hover:scale-105">
-                    <h3 class="text-xl font-semibold text-amber-100 mb-2">The Golden Reign</h3>
-                    <p class="text-amber-200">Established an era of perfect harmony, where all were equal, and poverty was a forgotten word. No thieves, no lies, just pure golden goodness.</p>
-                </div>
-                <div class="glass-card p-6 transform transition-transform hover:scale-105">
-                    <h3 class="text-xl font-semibold text-amber-100 mb-2">The Ultimate Sacrifice</h3>
-                    <p class="text-amber-200">Honored a promise to Va
+/* Continuous Slideshow */
+.continuous-slideshow-container {
+  overflow: hidden;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+.continuous-slideshow-track {
+  display: flex;
+  width: 200%; /* doubled width for looping effect */
+  animation: slide-track 20s linear infinite;
+}
+@keyframes slide-track {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}animation: scroll 30s linear infinite; }
+.continuous-slideshow-slide { flex: 0 0 calc(100% / 3);
+padding: 0.5rem; }
+@keyframes scroll { 0% { transform: translateX(0%); } 100% {
+transform: translateX(-50%); } }
+/* Floating Action Buttons */
+@keyframes subtle-pulse { 0%, 100% { transform: scale(1);
+filter: drop-shadow(0 0 5px var(--button-bg)); } 50% { transform:
+scale(1.1); filter: drop-shadow(0 0 15px var(--button-bg)); } }
+.chat-toggle-btn { animation: subtle-pulse 2s ease-in-out
+infinite; transition: transform 0.2s ease-in-out, opacity 0.5s
+ease-in-out, visibility 0.5s ease-in-out; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50%
+{ transform: translateY(-10px); } }
+.translator-toggle-btn { animation: float 3s ease-in-out
+infinite; transition: transform 0.2s ease-in-out; }
+/* Theme Toggle */
+.theme-toggle-btn { background: none; border: none; cursor:
+pointer; transition: transform 0.3s ease; }
+.theme-toggle-btn:hover { transform: scale(1.1); }
+.theme-toggle-btn svg { transition: transform 0.5s
+ease-in-out; }
+.cosmic-mode .theme-toggle-btn svg { transform:
+rotate(180deg); }
+/* Modal Styles */
+.modal { position: fixed; top: 0; left: 0; width: 100%;
+height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex;
+justify-content: center; align-items: center; z-index: 70; opacity: 0;
+visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s
+ease; }
+.modal.open { opacity: 1; visibility: visible; }
+.modal-content { background: var(--card-bg); padding: 2rem;
+border-radius: 1.5rem; max-width: 600px; width: 90%; max-height: 80vh;
+overflow-y: auto; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); position:
+relative; color: var(--text-color); transform: scale(0.95);
+transition: transform 0.3s ease; }
+.modal.open .modal-content { transform: scale(1); }
+.cosmic-mode .modal-content { background-color: #1a2035;
+color: #d1d9e2; }
+.cosmic-mode input, .cosmic-mode textarea, .cosmic-mode
+.chat-input { color: #d1d9e2 !important; background-color: #2a2c42;
+border-color: #3f456c; }
+.chatbot-icon { width: 50px; height: 50px; }
+function animateCosmicCanvas() {
+            requestAnimationFrame(animateCosmicCanvas);
+            if (!body.classList.contains('cosmic-mode')) { ctx.clearRect(0, 0, innerWidth, innerHeight); return; }
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let p of particles) {
+                p.x += p.directionX; p.y += p.directionY;
+                if (p.x + p.size > cosmicCanvas.width || p.x - p.size < 0) p.directionX = -p.directionX;
+                if (p.y + p.size > cosmicCanvas.height || p.y - p.size < 0) p.directionY = -p.directionY;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fillStyle = p.color; ctx.fill();
+            }
+        }
+        window.addEventListener('resize', setupCosmicCanvas);
+        setupCosmicCanvas();
+        animateCosmicCanvas();
+
+        // On Scroll Fade-in
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // Flower & Butterfly Effects
+        const flowerContainer = document.getElementById('flower-container');
+        const butterflyContainer = document.getElementById('butterfly-container');
+        const flowers = ['🌸', '🌺', '🌼', '🌷', '🌻'];
+        function createEffect(container, className, text, duration, delay) {
+            const el = document.createElement('div');
+            el.classList.add(className);
+            el.innerText = text;
+            el.style.left = `${Math.random() * 100}vw`;
+            el.style.animationDuration = `${duration}s`;
+            el.style.animationDelay = `${delay}s`;
+            if (className === 'butterfly') {
+                el.style.top = `${Math.random() * 80 + 10}vh`;
+                el.style.animationName = 'flutter-fly';
+            }
+            container.appendChild(el);
+            setTimeout(() => el.remove(), (duration + delay) * 1000);
+        }
+        setInterval(() => createEffect(flowerContainer, 'flower', flowers[Math.floor(Math.random() * flowers.length)], Math.random() * 5 + 5, Math.random() * 5), 1000);
+        setInterval(() => createEffect(butterflyContainer, 'butterfly', '🦋', Math.random() * 8 + 12, Math.random() * 5), 3000);
+
+        // Click effect
+        document.addEventListener('click', e => {
+            const effect = document.createElement('div');
+            effect.classList.add('click-effect');
+            effect.innerText = '✨';
+            body.appendChild(effect);
+            effect.style.left = `${e.clientX}px`; effect.style.top = `${e.clientY}px`;
+            setTimeout(() => effect.remove(), 1000);
+        });
+
+        // Slideshow
+        let slideIndex = 0;
+        const slidesWrapper = document.getElementById('slides-wrapper');
+        const totalSlides = slidesWrapper.children.length;
+        window.plusSlides = n => { slideIndex = (slideIndex + n + totalSlides) % totalSlides; slidesWrapper.style.transform = `translateX(-${slideIndex * 100}%)`; };
+        setInterval(() => plusSlides(1), 5000);
+
+        // Theme Toggle
+        themeToggleBtn.addEventListener('click', () => {
+            body.classList.toggle('cosmic-mode');
+            const isCosmic = body.classList.contains('cosmic-mode');
+            localStorage.setItem('theme', isCosmic ? 'cosmic' : 'default');
+            themeIcon.innerHTML = isCosmic ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />` : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />`;
+            setupCosmicCanvas();
+        });
+        if (localStorage.getItem('theme') === 'cosmic') { themeToggleBtn.click(); }
+
+        // Sidebars
+        function setupSidebar(toggleId, sidebarId, closeId) {
+            document.getElementById(toggleId).addEventListener('click', () => document.getElementById(sidebarId).classList.add('open'));
+            document.getElementById(closeId).addEventListener('click', () => document.getElementById(sidebarId).classList.remove('open'));
+        }
+        setupSidebar('chat-toggle-btn', 'chat-sidebar', 'close-chat-btn');
+        setupSidebar('translator-toggle-btn', 'translator-sidebar', 'close-translator-btn');
+        setupSidebar('hamburger-btn', 'hamburger-menu', 'close-menu-btn');
+        window.closeMenu = () => document.getElementById('hamburger-menu').classList.remove('open');
+        window.openTranslator = () => { closeMenu(); document.getElementById('translator-sidebar').classList.add('open'); }
+        
+        // --- API Calls & Logic ---
+        const apiKey = ""; // Canvas provides this
+        async function makeApiCall(apiUrl, payload, retries = 3) { /* ... same as before ... */ }
+
+        // Chatbot, Translator, Recipe Modal, Image Generator... (functions remain the same)
+        const chatMessages = document.getElementById('chat-messages'); const chatInput = document.getElementById('chat-input'); const sendChatBtn = document.getElementById('send-chat-btn'); let chatHistory = []; function addMessage(sender, text) { const messageEl = document.createElement('div'); messageEl.classList.add('message', sender, 'new'); messageEl.textContent = text; chatMessages.appendChild(messageEl); chatMessages.scrollTop = chatMessages.scrollHeight; } addMessage('bot', 'Greetings! I am Maaveli. How may I assist you, my dear subject?'); async function handleChat() { const userMessage = chatInput.value.trim(); if (!userMessage) return; addMessage('user', userMessage); chatInput.value = ''; addMessage('bot', '...'); chatHistory.push({ role: "user", parts: [{ text: userMessage }] }); try { const systemPrompt = "You are King Mahabali (Maaveli), a just, wise, and benevolent mythological king from Kerala, India. You are speaking to your subjects. Your tone should be regal, kind, a little bit humorous, and filled with ancient wisdom. You are known for the Onam festival. Keep your answers concise and relevant to your persona."; const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`; const payload = { contents: chatHistory, systemInstruction: { parts: [{ text: systemPrompt }] }, }; const result = await makeApiCall(apiUrl, payload); const botResponse = result.candidates[0].content.parts[0].text; chatHistory.push({ role: "model", parts: [{ text: botResponse }] }); const lastMessage = chatMessages.lastElementChild; lastMessage.textContent = botResponse; } catch (error) { console.error('Chatbot API error:', error); const lastMessage = chatMessages.lastElementChild; lastMessage.textContent = "Apologies, my royal connection seems to be weak. Please try again."; } } sendChatBtn.addEventListener('click', handleChat); chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChat(); }); const translateBtn = document.getElementById('translateBtn'); const loadingIndicator = document.getElementById('loadingIndicator'); const inputText = document.getElementById('inputText'); const outputText = document.getElementById('outputText'); translateBtn.addEventListener('click', async () => { const textToTranslate = inputText.value.trim(); if (!textToTranslate) return; loadingIndicator.classList.remove('hidden'); translateBtn.disabled = true; outputText.value = ''; try { const systemPrompt = "You are an expert translator. Translate the given text to Malayalam. Provide only the translated text, without any additional explanations or pleasantries."; const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`; const payload = { contents: [{ parts: [{ text: textToTranslate }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, }; const result = await makeApiCall(apiUrl, payload); outputText.value = result.candidates[0].content.parts[0].text; } catch (error) { console.error('Translation API error:', error); outputText.value = "Translation failed. Please try again."; } finally { loadingIndicator.classList.add('hidden'); translateBtn.disabled = false; } }); const recipeModal = document.getElementById('recipe-modal'); const recipeTitle = document.getElementById('recipe-title'); const recipeContent = document.getElementById('recipe-content'); document.getElementById('close-recipe-modal').addEventListener('click', () => recipeModal.classList.remove('open')); recipeModal.addEventListener('click', (e) => { if (e.target === recipeModal) recipeModal.classList.remove('open'); }); async function generateRecipe(prompt, title) { closeMenu(); recipeModal.classList.add('open'); recipeTitle.textContent = `Generating ${title}...`; recipeContent.innerHTML = `<div class="flex justify-center"><div class="loading-animation"></div></div>`; try { const systemPrompt = "You are a master chef from Kerala specializing in traditional Onam Sadya dishes. Provide a clear, step-by-step recipe for the requested dish. Format your response with markdown for headings, lists, and bold text."; const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`; const payload = { contents: [{ parts: [{ text: prompt }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, }; const result = await makeApiCall(apiUrl, payload); let htmlContent = result.candidates[0].content.parts[0].text .replace(/### (.*)/g, '<h3 class="text-xl font-semibold mt-4 mb-2">$1</h3>') .replace(/## (.*)/g, '<h2 class="text-2xl font-bold mt-6 mb-3">$1</h2>') .replace(/\* \s*(.*)/g, '<li class="ml-6 list-disc">$1</li>') .replace(/\n/g, '<br>'); recipeTitle.textContent = title; recipeContent.innerHTML = htmlContent; } catch (error) { console.error('Recipe API error:', error); recipeContent.innerHTML = `<p>My apologies, the royal recipe book seems to be misplaced. Please try again later.</p>`; } } window.generatePayasamRecipe = () => generateRecipe('Parippu Payasam recipe', 'Parippu Payasam'); window.generateSadyaRecipe = () => generateRecipe('A simple Onam Sadya plan with 5 essential dishes', 'Onam Sadya Plan'); const imageLoading = document.getElementById('image-loading'); const generatedImage = document.getElementById('generated-image'); window.generateImage = async function() { const prompt = document.getElementById('art-prompt').value; if (!prompt) return; imageLoading.classList.remove('hidden'); generatedImage.classList.add('hidden'); try { const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`; const payload = { instances: [{ prompt: `An epic, cinematic, fantasy art style image of: ${prompt}` }], parameters: { "sampleCount": 1 } }; const result = await makeApiCall(apiUrl, payload); if (result.predictions && result.predictions[0]?.bytesBase64Encoded) { generatedImage.src = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`; generatedImage.classList.remove('hidden'); } else { throw new Error('No image data in response'); } } catch (error) { console.error('Image generation error:', error); alert('Could not create the royal art. The muses are not cooperating today.'); } finally { imageLoading.classList.add('hidden'); } }
+
+        // --- FIXED & UPDATED FEATURES ---
+
+        // Text-to-Speech
+        const ttsButton = document.getElementById('tts-button');
+        const ttsLoading = document.getElementById('tts-loading');
+        window.speakAboutTheKing = async function() {
+            const textToSpeak = document.getElementById('about-text').textContent.trim();
+            ttsButton.disabled = true;
+            ttsLoading.classList.remove('hidden');
+            try {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+                const payload = {
+                     contents: [{ parts: [{ text: `Say in a wise, regal, and slightly cheerful male voice: ${textToSpeak}` }] }],
+                     generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Gacrux" } } } },
+                     model: "gemini-2.5-flash-preview-tts"
+                };
+                const result = await makeApiCall(apiUrl, payload);
+                const audioData = result.candidates[0].content.parts[0].inlineData.data;
+                const mimeType = result.candidates[0].content.parts[0].inlineData.mimeType;
+                if (audioData && mimeType.startsWith("audio/")) {
+                    const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)[1], 10);
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const pcm16 = new Int16Array(pcmData);
+                    const wavBlob = pcmToWav(pcm16, 1, sampleRate);
+                    new Audio(URL.createObjectURL(wavBlob)).play();
+                } else { throw new Error("Invalid audio data received"); }
+            } catch (error) { console.error('TTS error:', error); alert('My royal decree cannot be spoken at this moment. Please try again.'); }
+            finally { ttsButton.disabled = false; ttsLoading.classList.add('hidden'); }
+        }
+        function base64ToArrayBuffer(base64) { const binaryString = window.atob(base64); const len = binaryString.length; const bytes = new Uint8Array(len); for (let i = 0; i < len; i++) { bytes[i] = binaryString.charCodeAt(i); } return bytes.buffer; } function pcmToWav(pcmData, numChannels, sampleRate) { const buffer = new ArrayBuffer(44 + pcmData.length * 2); const view = new DataView(buffer); const writeString = (view, offset, string) => { for (let i = 0; i < string.length; i++) { view.setUint8(offset + i, string.charCodeAt(i)); } }; const byteRate = sampleRate * numChannels * 2; const blockAlign = numChannels * 2; writeString(view, 0, 'RIFF'); view.setUint32(4, 36 + pcmData.length * 2, true); writeString(view, 8, 'WAVE'); writeString(view, 12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, numChannels, true); view.setUint32(24, sampleRate, true); view.setUint32(28, byteRate, true); view.setUint16(32, blockAlign, true); view.setUint16(34, 16, true); writeString(view, 36, 'data'); view.setUint32(40, pcmData.length * 2, true); for (let i = 0; i < pcmData.length; i++) { view.setInt16(44 + i * 2, pcmData[i], true); } return new Blob([view], { type: 'audio/wav' }); }
+
+        // Calendar & Games
+        const calendarBtn = document.getElementById('generate-calendar-btn');
+        const calendarContent = document.getElementById('calendar-content');
+        const gamesBtn = document.getElementById('generate-games-btn');
+        const gamesContent = document.getElementById('games-content');
+        async function generateContent(button, contentElement, prompt, isSearch) {
+            contentElement.innerHTML = `<div class="flex justify-center"><div class="loading-animation"></div></div>`;
+            button.disabled = true;
+            try {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ parts: [{ text: prompt }] }] };
+                if (isSearch) payload.tools = [{ "google_search": {} }];
+                const result = await makeApiCall(apiUrl, payload);
+                const text = result.candidates[0].content.parts[0].text;
+                contentElement.innerHTML = text.replace(/### (.*)/g, '<h3 class="text-xl font-semibold mt-4 mb-2">$1</h3>').replace(/## (.*)/g, '<h2 class="text-2xl font-bold mt-6 mb-3">$1</h2>').replace(/\* \s*(.*)/g, '<li class="ml-6 list-disc text-left">$1</li>').replace(/\n/g, '<br>');
+            } catch (error) { console.error('Content generation error:', error); contentElement.textContent = 'My apologies, the royal scribes are busy. Please try again.'; }
+            finally { button.disabled = false; }
+        }
+        calendarBtn.addEventListener('click', () => generateContent(calendarBtn, calendarContent, "Using Google Search, find and list the main dates for the Onam festival in 2026. List the main 10 days from Atham to Thiruvonam with their corresponding dates.", true));
+        gamesBtn.addEventListener('click', () => generateContent(gamesBtn, gamesContent, "Describe three traditional Onam games (Onakkalikal). For each game, provide a heading, a brief description of how to play, and the rules. Format it nicely with markdown.", false));
+        
+        // --- Remaining Game & Firebase Logic (Unchanged) ---
+        // Photo Uploader, Tic-Tac-Toe, Boat Race, Contact Form...
+        const photoInput = document.getElementById('onam-photo-video-input'); const uploadBtn = document.getElementById('upload-photo-btn'); const uploadStatus = document.getElementById('upload-status'); const photosContainer = document.getElementById('uploaded-photos-container'); uploadBtn.addEventListener('click', async () => { const file = photoInput.files[0]; if (!file || !storage || !db) return; uploadStatus.innerHTML = `<div class="flex justify-center"><div class="loading-animation"></div></div> <p>Uploading...</p>`; try { const storageRef = ref(storage, `onam_photos/${Date.now()}_${file.name}`); await uploadBytes(storageRef, file); const downloadURL = await getDownloadURL(storageRef); await addDoc(collection(db, `/artifacts/${appId}/public/data/onam_photos`), { imageUrl: downloadURL, createdAt: serverTimestamp() }); uploadStatus.textContent = 'Upload successful! The King is pleased.'; photoInput.value = ''; } catch (error) { console.error("Upload failed:", error); uploadStatus.textContent = 'Upload failed. Please try again.'; } }); if (db) { onSnapshot(query(collection(db, `/artifacts/${appId}/public/data/onam_photos`)), (snapshot) => { photosContainer.innerHTML = ''; snapshot.forEach(doc => { const photoData = doc.data(); const imgContainer = document.createElement('div'); imgContainer.classList.add('glass-card', 'p-2', 'transform', 'transition-transform', 'hover:scale-105'); imgContainer.innerHTML = `<img src="${photoData.imageUrl}" alt="Onam celebration" class="w-full h-auto object-cover rounded-xl">`; photosContainer.prepend(imgContainer); }); }); } const gameStatus = document.getElementById('game-status'); const ticTacToeBoard = document.getElementById('tic-tac-toe-board'); const restartGameBtn = document.getElementById('restart-game-btn'); const cells = document.querySelectorAll('.cell'); const modePvpBtn = document.getElementById('mode-pvp'); const modePveBtn = document.getElementById('mode-pve'); let gameActive = true, currentPlayerSymbol = '🌸', gameState = ["", "", "", "", "", "", "", "", ""], gameMode = 'pvp'; const playerOne = '🌸', playerTwo = '☂️'; const winningMessage = (player) => gameMode === 'pve' && player === playerTwo ? `Maveli has won! A royal victory!` : `Player ${player} has won!`; const drawMessage = () => `The game is a draw! A worthy challenge!`; const currentPlayerTurnMessage = () => gameMode === 'pve' ? (currentPlayerSymbol === playerOne ? "Your turn (🌸)" : "Maveli is thinking...") : `It's player ${currentPlayerSymbol}'s turn`; const winningConditions = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]; modePvpBtn.addEventListener('click', () => { gameMode = 'pvp'; modePvpBtn.style.backgroundColor = 'var(--button-hover)'; modePveBtn.style.backgroundColor = 'var(--button-bg)'; handleRestartGame(); }); modePveBtn.addEventListener('click', () => { gameMode = 'pve'; modePveBtn.style.backgroundColor = 'var(--button-hover)'; modePvpBtn.style.backgroundColor = 'var(--button-bg)'; handleRestartGame(); }); function handleCellClick(event) { const clickedCell = event.target; const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index')); if (gameState[clickedCellIndex] !== "" || !gameActive || (gameMode === 'pve' && currentPlayerSymbol === playerTwo)) return; handleCellPlayed(clickedCell, clickedCellIndex); handleResultValidation(); if (gameMode === 'pve' && gameActive) { ticTacToeBoard.style.pointerEvents = 'none'; gameStatus.innerHTML = currentPlayerTurnMessage(); setTimeout(() => { makeMaveliMove(); ticTacToeBoard.style.pointerEvents = 'auto'; }, 1000); } } function handleCellPlayed(cell, index) { gameState[index] = currentPlayerSymbol; cell.innerHTML = currentPlayerSymbol; } function handlePlayerChange() { currentPlayerSymbol = currentPlayerSymbol === playerOne ? playerTwo : playerOne; gameStatus.innerHTML = currentPlayerTurnMessage(); } function handleResultValidation() { let roundWon = false, winningPlayer = ''; for (const winCondition of winningConditions) { let a = gameState[winCondition[0]], b = gameState[winCondition[1]], c = gameState[winCondition[2]]; if (a === '' || b === '' || c === '') continue; if (a === b && b === c) { roundWon = true; winningPlayer = a; break; } } if (roundWon) { gameStatus.innerHTML = winningMessage(winningPlayer); gameActive = false; return; } if (!gameState.includes("")) { gameStatus.innerHTML = drawMessage(); gameActive = false; return; } handlePlayerChange(); } function makeMaveliMove() { if (!gameActive) return; const bestMove = findBestMove(); if(bestMove === -1) return; const cellToPlay = document.querySelector(`.cell[data-cell-index='${bestMove}']`); handleCellPlayed(cellToPlay, bestMove); handleResultValidation(); } function findBestMove() { for (let i = 0; i < 9; i++) { if (gameState[i] === '') { gameState[i] = playerTwo; if (checkWinner(playerTwo)) { gameState[i] = ''; return i; } gameState[i] = ''; } } for (let i = 0; i < 9; i++) { if (gameState[i] === '') { gameState[i] = playerOne; if (checkWinner(playerOne)) { gameState[i] = ''; return i; } gameState[i] = ''; } } if (gameState[4] === '') return 4; const corners = [0, 2, 6, 8].filter(i => gameState[i] === ''); if (corners.length > 0) return corners[Math.floor(Math.random() * corners.length)]; return gameState.indexOf(''); } function checkWinner(player) { return winningConditions.some(c => c.every(i => gameState[i] === player)); } function handleRestartGame() { gameActive = true; currentPlayerSymbol = playerOne; gameState = ["", "", "", "", "", "", "", "", ""]; cells.forEach(cell => cell.innerHTML = ""); ticTacToeBoard.style.pointerEvents = 'auto'; gameStatus.innerHTML = currentPlayerTurnMessage(); } ticTacToeBoard.addEventListener('click', handleCellClick); restartGameBtn.addEventListener('click', handleRestartGame); gameStatus.innerHTML = currentPlayerTurnMessage(); modePvpBtn.click(); const startRaceBtn = document.getElementById('start-race-btn'); const raceTrack = document.getElementById('race-track'); const raceResult = document.getElementById('race-result'); const boatColors = ['Red', 'Green', 'Blue', 'Yellow']; startRaceBtn.addEventListener('click', () => { startRaceBtn.disabled = true; raceResult.textContent = ''; raceTrack.innerHTML = ''; let boats = [], maxDuration = 0; for (let i = 0; i < 4; i++) { const boat = document.createElement('div'); boat.textContent = '🛶'; boat.classList.add('boat'); boat.style.top = `${20 + i * 20}%`; const duration = Math.random() * 2 + 3; if(duration > maxDuration) maxDuration = duration; boat.style.transitionDuration = `${duration}s`; raceTrack.appendChild(boat); boats.push({el: boat, duration: duration, color: boatColors[i]}); } requestAnimationFrame(() => { boats.forEach(b => b.el.classList.add('racing')); }); setTimeout(() => { let winner = boats.reduce((prev, current) => (prev.duration < current.duration) ? prev : current); raceResult.textContent = `The ${winner.color} boat wins the royal cup!`; startRaceBtn.disabled = false; }, (maxDuration * 1000) + 100); }); const contactForm = document.getElementById('contact-form'); const contactStatus = document.getElementById('contact-status'); contactForm.addEventListener('submit', async (e) => { e.preventDefault(); if (!db) { contactStatus.textContent = "Database connection not available."; return; } const name = contactForm.name.value, message = contactForm.message.value; contactStatus.textContent = "Sending your wish to the King..."; try { await addDoc(collection(db, `/artifacts/${appId}/public/data/royal_wishes`), { name, message, sentAt: serverTimestamp() }); contactStatus.textContent = "Your message has been received by the royal court!"; contactForm.reset(); } catch(error) { console.error("Error sending message:", error); contactStatus.textContent = "A messenger hawk got lost. Please try again."; } });
+
+    </script>
+</body>
+</html>
